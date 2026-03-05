@@ -1,0 +1,245 @@
+/* Container & Columns */
+.container {
+  display: flex;
+  width: 1780px;
+  height: 760px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f5f8fa;
+  font-family: Arial, sans-serif;
+  color: #2c3e50;
+}
+
+.column {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 24px;
+  flex: 1;
+  margin: 0 15px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 400px;
+  max-width: 580px;
+}
+
+/* Grid layout for input/label sections */
+.product-section,
+.component-section,
+.summary-status-section {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  column-gap: 20px;
+  row-gap: 14px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* Labels */
+label[soho-label] {
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+  color: #2c3e50;
+  display: block;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e0;
+  background-color: #fefefe;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[readonly] {
+  background-color: #f9f9f9;
+  border-color: #d1d8e0;
+}
+
+input.highlight {
+  background-color: #fff9c4;
+  border-color: #f1c40f;
+}
+
+/* Buttons next to inputs */
+.input-button-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-button-group button[soho-button="icon"] {
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+/* Connected Attributes column */
+.connected-attributes-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Datagrid fills remaining space */
+.connected-attributes-col > div[soho-busyindicator] {
+  flex-grow: 1;
+  min-height: 0;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
+/* Section Headers */
+.header-secondary {
+  font-weight: 700;
+  font-size: 24px;
+  color: #1a73e8;
+  border-bottom: 2px solid #1a73e8;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+/* Extra styling */
+.value-bold {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.component-seq {
+  font-weight: 700;
+  font-size: 18px;
+  color: #34495e;
+}
+
+.component-desc {
+  font-style: italic;
+  color: #7f8c8d;
+}
+
+.component-info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mo-input {
+  font-weight: 700;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e0;
+  background-color: #f9f9f9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.positive-stock {
+  color: green;
+  font-weight: 700;
+}
+
+.negative-stock {
+  color: red;
+  font-weight: 700;
+}
+
+
+.positive-projected {
+  color: green;
+  font-weight: 700;
+}
+
+.negative-projected {
+  color: red;
+  font-weight: 700;
+}
+
+.positive-projectedS {
+  color: green;
+  font-weight: 700;
+}
+
+.negative-projectedS {
+  color: red;
+  font-weight: 700;
+}
+
+
+.positive-projectedP {
+  color: green;
+  font-weight: 700;
+}
+
+.negative-projectedP {
+  color: red;
+  font-weight: 700;
+}
+
+
+
+
+
+.mo-positive {
+  color: green;
+}
+
+.mo-negative {
+  color: red;
+}
+
+.negative-warning {
+  font-weight: 700;
+  color: #e74c3c;
+  margin-left: 8px;
+}
+
+.container-info {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-left: 12px;
+}
+
+/* Connection section */
+.connection-header {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 22px;
+  color: #34495e;
+  border-bottom: none;
+}
+
+/* Connection lines */
+.connection-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.connection-label {
+  min-width: 120px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #2c3e50;
+  flex-shrink: 0;
+}
+
+.connection-input-group {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.connection-input-group input {
+  flex-grow: 1;
+}
+
+.connection-input-group button {
+  margin-left: 10px;
+}

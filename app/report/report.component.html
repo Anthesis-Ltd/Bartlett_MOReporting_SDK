@@ -1,0 +1,268 @@
+<div class="container">
+  <!-- Left column: Production Line Details -->
+  <div class="column">
+    <h2 class="header-secondary">Production Line: {{ sWCLN }}</h2>
+    <div class="product-section">
+      <label soho-label>Work Centre:</label>
+      <input readonly [(ngModel)]="iPLGR" type="text" autocomplete="off" />
+
+      <label soho-label>MO Number:</label>
+      <input readonly [(ngModel)]="iMFNO" type="text" autocomplete="off" />
+
+      <label soho-label>Product Number:</label>
+      <input readonly [(ngModel)]="iPRNO" type="text" autocomplete="off" />
+
+      <label soho-label>Lot Number:</label>
+      <input readonly [(ngModel)]="xBANO" type="text" autocomplete="off" />
+
+      <ng-container *ngIf="produce">
+        <label soho-label>Washed Balance:</label>
+        <input readonly [(ngModel)]="xMREM" type="text" autocomplete="off" />
+      </ng-container>
+
+      <label soho-label>Location:</label>
+      <span class="input-button-group">
+        <input
+          [(ngModel)]="iTWSL"
+          type="text"
+          autocomplete="off"
+          (change)="cWHSL($event)"
+        />
+        <button
+          (click)="WHSLLookup()"
+          soho-button="icon"
+          icon="search"
+          title="Search"
+        ></button>
+      </span>
+
+      <label soho-label>Quantity:</label>
+      <input
+        autofocus
+        type="number"
+        class="highlight"
+        [(ngModel)]="iRPQA"
+        autocomplete="off"
+        (change)="cRPQA($event)"
+      />
+
+      <ng-container>
+        <label soho-label>Projected:</label>
+        <input
+          *ngIf="qMO"
+          readonly
+          [(ngModel)]="oPJBAL"
+          type="text"
+          autocomplete="off"
+          [class.positive-projected]="pospro"
+          [class.negative-projected]="negpro"
+        />
+
+        <input
+          *ngIf="qstock && packed"
+          readonly
+          [(ngModel)]="oPJBALS"
+          type="text"
+          autocomplete="off"
+          [class.positive-projectedS]="posproS"
+          [class.negative-projectedS]="negproS"
+        />
+
+        <input
+          *ngIf="qstock && produce"
+          readonly
+          [(ngModel)]="oPJBALP"
+          type="text"
+          autocomplete="off"
+          [class.positive-projectedP]="posproP"
+          [class.negative-projectedP]="negproP"
+        />
+      </ng-container>
+
+      <ng-container *ngIf="produce; else notProduce">
+        <button
+          (click)="processStockFeed()"
+          soho-button="primary"
+          title="Close MO"
+          style="float: right"
+        >
+          Close MO
+        </button>
+      </ng-container>
+
+      <ng-template #notProduce>
+        <button
+          (click)="processClose()"
+          soho-button="secondary"
+          title="Close MO"
+          style="float: right"
+        >
+          Close MO
+        </button>
+      </ng-template>
+
+      <label *ngIf="processing" soho-label class="processing-label"
+        >PROCESSING:</label
+      >
+    </div>
+  </div>
+
+  <!-- Middle column: Component Details + Connection -->
+  <div class="column">
+    <h2 class="header-secondary">
+      Component:&nbsp;<span style="font-size: 15px">{{ qITDS }}</span>
+    </h2>
+    <div class="component-section">
+      <label soho-label>Component No:</label>
+      <div class="component-info-row">
+        <input readonly [(ngModel)]="qMTNO" type="text" autocomplete="off" />
+      </div>
+
+      <label soho-label>Runtime Qty:</label>
+      <input readonly [(ngModel)]="qCNQT" type="text" autocomplete="off" />
+
+      <ng-container *ngIf="qstock && packed">
+        <label soho-label>Washed (KG):</label>
+        <input readonly [(ngModel)]="oAVAL" type="text" autocomplete="off" />
+        <label soho-label>Washed (CS):</label>
+        <input readonly [(ngModel)]="oAVAC" type="text" autocomplete="off" />
+      </ng-container>
+
+      <ng-container *ngIf="qstock && produce">
+        <label soho-label>LOT (KG):</label>
+        <input readonly [(ngModel)]="oAVAL" type="text" autocomplete="off" />
+      </ng-container>
+
+      <ng-container *ngIf="qMO">
+        <label soho-label>Washed (KG):</label>
+        <input
+          readonly
+          [(ngModel)]="oAVAL2"
+          autocomplete="off"
+          class="mo-input"
+        />
+
+        <label soho-label>Washed (Cases):</label>
+        <input
+          readonly
+          [(ngModel)]="oAVAL2C"
+          autocomplete="off"
+          class="mo-input"
+        />
+
+        <label soho-label>Projected o/Hand:</label>
+        <input
+          readonly
+          [(ngModel)]="oAVAL3"
+          autocomplete="off"
+          class="mo-input"
+          [ngClass]="{ 'mo-positive': posmo, 'mo-negative': negmo }"
+        />
+
+        <!--   <label soho-label>Projected Cases:</label>
+        <input
+          readonly
+          [(ngModel)]="oAVAL3C"
+          autocomplete="off"
+          class="mo-input"
+          [ngClass]="{ 'mo-positive': posmo, 'mo-negative': negmo }"
+        /> -->
+      </ng-container>
+    </div>
+
+    <!-- Connection section -->
+    <h2 class="header-secondary connection-header">Connection</h2>
+
+    <div class="connection-line">
+      <label soho-label class="connection-label">Lot Number:</label>
+      <span class="input-button-group connection-input-group">
+        <input
+          readonly
+          [(ngModel)]="oBANO"
+          (change)="cBANO($event)"
+          type="text"
+          class="highlight"
+          autocomplete="off"
+        />
+        <button
+          (click)="BANOLookup()"
+          soho-button="icon"
+          icon="search"
+          title="Search"
+        ></button>
+        <span *ngIf="acamu" class="container-info">Container: {{ qCAMU }}</span>
+      </span>
+    </div>
+
+    <div class="connection-line">
+      <label soho-label class="connection-label">MO:</label>
+      <span class="input-button-group connection-input-group">
+        <input
+          readonly
+          [(ngModel)]="oRORN"
+          (change)="cMFNO($event)"
+          (keyup.enter)="linked01()"
+          type="number"
+          class="highlight"
+          autocomplete="off"
+        />
+        <button
+          (click)="MFNOLookup()"
+          soho-button="icon"
+          icon="search"
+          title="Search"
+        ></button>
+      </span>
+    </div>
+
+<div *ngIf="issuemanual" style="margin-top: 40px" class="field">
+  <input
+    soho-checkbox
+    type="checkbox"
+    [attr.id]="id1"
+    name="checkbox2"
+    (ngModelChange)="onCheckboxChange($event)"
+    [(ngModel)]="model.checkBox1Value"
+  />
+  <label soho-label [attr.for]="id1" [forCheckBox]="true"
+    >Issue stock manually</label
+  >
+</div>
+
+
+  </div>
+
+  <!-- Right column: Connected Attributes + Summary -->
+  <div class="column connected-attributes-col">
+    <h2 class="header-secondary">Connected Attributes</h2>
+    <div
+      soho-busyindicator
+      [activated]="isBusy"
+      [blockUI]="true"
+      [displayDelay]="0"
+      #ReportDatagrid
+      id="POReport"
+      soho-datagrid
+      [gridOptions]="datagridOptions"
+      (selected)="onSelected($event.rows)"
+      class="datagrid-fullheight"
+    ></div>
+
+    <div class="summary-status-section">
+      <label soho-label>Ordered Qty:</label>
+      <input readonly [(ngModel)]="oORQA" autocomplete="off" />
+
+      <label soho-label>Manuf Qty:</label>
+      <input readonly [(ngModel)]="oMAQA" autocomplete="off" />
+
+      <label soho-label>Received Qty:</label>
+      <input readonly [(ngModel)]="oRVQA" autocomplete="off" />
+
+      <label soho-label>Operation Status:</label>
+      <input readonly [(ngModel)]="sWHHS" autocomplete="off" />
+
+      <label soho-label>Material Status:</label>
+      <input readonly [(ngModel)]="sWMST" autocomplete="off" />
+    </div>
+  </div>
+</div>
