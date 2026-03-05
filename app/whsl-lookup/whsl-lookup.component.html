@@ -1,0 +1,14 @@
+<div class="row scrollable" #myModal style="margin-top: 20px;">
+   <div class="twelwe columns">
+      <div *ngIf="true">
+         <div class="form-layout-compact" #dialogPlaceholder1>
+            <div style="margin-top:20px;margin-left:20px;" #NoledgerDatagrid id="gridItemLookup" soho-datagrid
+               [gridOptions]="datagridOptions" soho-busyindicator [activated]="isBusy" [blockUI]="true"
+               (selected)="onSelected($event.rows)" [displayDelay]="0"
+               style="height:350px;min-height:320px;width:800px;overflow:auto;">
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
