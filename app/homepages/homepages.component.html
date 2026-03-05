@@ -1,0 +1,23 @@
+<soho-icons></soho-icons>
+<soho-icons-empty></soho-icons-empty>
+<nav id="application-menu" soho-application-menu [openOnLarge]="false" [filterable]="false">
+   <div>
+      <label class="audible" for="application-menu-searchfield">Search</label>
+   </div>
+   <div class="accordion panel inverse" data-options='{"allowOnePane": true, "rerouteOnLinkClick": false}'>
+
+      <div style="margin-left:43px;margin-top:40px">
+         <button soho-button="primary" (click)="exportToExcel()">Export to Excel</button>
+      </div>
+   </div>
+
+   <div class="branding">
+      <svg soho-icon icon="logo"></svg>
+   </div>
+</nav>
+
+<div class="page-container no-scroll">
+   <div id="maincontent">
+      <router-outlet></router-outlet>
+   </div>
+</div>
